@@ -5,9 +5,9 @@ const Circle = props => (
         cx={props.cx}
         cy={props.cy}
         r={props.r}
-        stroke="green"
-        stroke-width="4"
-        fill="yellow" />
+        stroke="black"
+        stroke-width="3"
+        fill="white" />
 )
 
 export default Circle

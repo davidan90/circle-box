@@ -1,9 +1,20 @@
 import React from 'react'
+import styled from 'styled-components'
+import { number, shape, arrayOf } from 'prop-types'
 import Circle from '../Circle'
 
+const CircleBox = styled.svg`
+    height: 200px;
+    width: 100%;
+
+    circle:hover {
+        fill: yellow
+    }
+`
+
 const CircleBoxComponent = props => (
-    <svg width="100%" height="200px">
-        { 
+    <CircleBox>
+        {
             props.circles.map(circle => (
                 <Circle
                     cx={circle.cx}
@@ -12,13 +23,15 @@ const CircleBoxComponent = props => (
                 />
             ))
         }
-    </svg> 
+    </CircleBox>
 )
 
-// CircleBoxComponent.propTypes = {
-//     circles: React.PropTypes.arrayOf(
-//         React.propTypes.object
-//     ).isRequired
-// }
+CircleBoxComponent.propTypes = {
+    circles: arrayOf(shape({
+        cx: number,
+        cy: number,
+        r: number,
+    })).isRequired
+}
 
 export default CircleBoxComponent

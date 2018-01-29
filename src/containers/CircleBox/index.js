@@ -1,30 +1,35 @@
 import React from 'react'
+import { string, number } from 'prop-types'
 import CircleBoxComponent from '../../components/CircleBox/index'
 
 class CircleBox extends React.Component {
+    static propTypes = {
+        id: string.isRequired,
+        circles: number,
+        height: string,
+        width: string,
+    }
 
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state = {
-            numberOfCircles: 100,
+            numberOfCircles: props.circles || 100,
             circles: [],
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         const { numberOfCircles } = this.state
-        const circles = this.getCirclesArray(numberOfCircles)
+        const parent = document.getElementById(this.props.id)
+        const circles = this.getCirclesArray(parent, numberOfCircles)
         this.setState({circles})
     }
 
-    getCirclesArray = (numberOfCircles) => Array(numberOfCircles).fill().map(e => this.getRandomCircle())
-
-    getRandomCircle = () => {
-        // TODO get container width and height
-        return this.getCordenates(787, 200)
-    }
+    getCirclesArray = (parent, numberOfCircles) => Array(numberOfCircles)
+        .fill()
+        .map(e => this.getRandomCircle(parent.offsetWidth, parent.offsetHeight))
         
-    getCordenates = (width, height) => {
+    getRandomCircle = (width, height) => {
         const r = this.getR()
         return {
             cx: this.getPosition(width, r),
@@ -38,14 +43,16 @@ class CircleBox extends React.Component {
         return radios[Math.floor(Math.random() * 10)]
     }
     
-    getPosition = (max, min) => {
-        return Math.floor((Math.random() * max) + min)
+    getPosition = (axis, radius) => {
+        const cordinate = Math.floor((Math.random() * axis)) - radius
+        return  cordinate >= radius ? cordinate : radius
     }
 
     render() {
         const { circles } = this.state
+        const { id, height, width } = this.props
         return (
-            <CircleBoxComponent circles={circles} />
+            <CircleBoxComponent  {...{id, height, width, circles}} />
         )
     }
 }

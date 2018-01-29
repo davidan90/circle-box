@@ -1,5 +1,5 @@
 import React from 'react'
-import { number } from 'prop-types'
+import { string, number, arrayOf } from 'prop-types'
 import CircleComponent from '../../components/Circle/index'
 
 class Circle extends React.Component {
@@ -8,6 +8,7 @@ class Circle extends React.Component {
         cx: number.isRequired,
         cy: number.isRequired,
         r: number.isRequired,
+        colors: arrayOf(string),
     }
 
     constructor(){
@@ -18,8 +19,10 @@ class Circle extends React.Component {
     }
 
     handleOnMouseOver = () => {
-        const colors = ['#f9f9f5', '#16a085', '#daf7a6', '#ffc300', '#c70039', '#900c3f', '#686afd', '#b869ff', '#6bffdd', '#f0fcc4', '#4d6784']
-        const fill = colors[Math.floor(Math.random() * 11)]
+        const colors = this.props.colors ?
+            this.props.colors :
+            ['#f9f9f5', '#16a085', '#daf7a6', '#ffc300', '#c70039', '#900c3f', '#686afd', '#b869ff', '#6bffdd', '#f0fcc4', '#4d6784']
+        const fill = colors[Math.floor(Math.random() * colors.length)]
         this.setState({fill})
     }
 

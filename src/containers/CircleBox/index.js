@@ -1,19 +1,22 @@
 import React from 'react'
-import { string, number } from 'prop-types'
+import { string, number, arrayOf } from 'prop-types'
 import CircleBoxComponent from '../../components/CircleBox/index'
 
 class CircleBox extends React.Component {
     static propTypes = {
         id: string.isRequired,
-        circles: number,
+        numberOfCircles: number,
         height: string,
         width: string,
+        colors: arrayOf(string),
+        circlesRadius: arrayOf(number),
     }
 
     constructor(props){
         super(props)
         this.state = {
-            numberOfCircles: props.circles || 100,
+            numberOfCircles: props.numberOfCircles || 100,
+            circlesRadius: props.circlesRadius || [40, 37, 33, 28, 24, 19, 15, 10, 7, 4],
             circles: [],
         }
     }
@@ -39,8 +42,8 @@ class CircleBox extends React.Component {
     }
 
     getR = () => {
-        const radios = [40, 37, 33, 28, 24, 19, 15, 10, 7, 4]
-        return radios[Math.floor(Math.random() * 10)]
+        const { circlesRadius } = this.state
+        return circlesRadius[Math.floor(Math.random() * circlesRadius.length)]
     }
     
     getPosition = (axis, radius) => {
@@ -50,9 +53,9 @@ class CircleBox extends React.Component {
 
     render() {
         const { circles } = this.state
-        const { id, height, width } = this.props
+        const { id, height, width, colors } = this.props
         return (
-            <CircleBoxComponent  {...{id, height, width, circles}} />
+            <CircleBoxComponent  {...{id, height, width, colors, circles}} />
         )
     }
 }

@@ -27,6 +27,7 @@ const CircleBoxComponent = props => (
                         cx={circle.cx}
                         cy={circle.cy}
                         r={circle.r}
+                        colors={props.colors}
                     />
                 ))
             }
@@ -40,7 +41,8 @@ CircleBoxComponent.propTypes = {
         cx: number.isRequired,
         cy: number.isRequired,
         r: number.isRequired,
-    })).isRequired
+    })).isRequired,
+    colors: arrayOf(string),
 }
 
 export default CircleBoxComponent

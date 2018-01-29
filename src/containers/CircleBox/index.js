@@ -20,6 +20,7 @@ class CircleBox extends React.Component {
     getCirclesArray = (numberOfCircles) => Array(numberOfCircles).fill().map(e => this.getRandomCircle())
 
     getRandomCircle = () => {
+        // TODO get container width and height
         return this.getCordenates(787, 200)
     }
         

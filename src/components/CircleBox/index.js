@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { number, shape, arrayOf } from 'prop-types'
-import Circle from '../Circle'
+import Circle from '../../containers/Circle/index'
 
 const CircleBox = styled.svg`
     height: 200px;
@@ -15,8 +15,9 @@ const CircleBox = styled.svg`
 const CircleBoxComponent = props => (
     <CircleBox>
         {
-            props.circles.map(circle => (
+            props.circles.map((circle, index) => (
                 <Circle
+                    key={index}
                     cx={circle.cx}
                     cy={circle.cy}
                     r={circle.r}

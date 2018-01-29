@@ -1,13 +1,15 @@
 import React from 'react'
 
-const Circle = props => (
+const CircleComponent = props => (
     <circle
         cx={props.cx}
         cy={props.cy}
         r={props.r}
         stroke="black"
-        stroke-width="3"
-        fill="white" />
+        strokeWidth="3"
+        fill={props.fill}
+        onMouseOver={props.handleOnMouseOver}
+    />
 )
 
-export default Circle
+export default CircleComponent
